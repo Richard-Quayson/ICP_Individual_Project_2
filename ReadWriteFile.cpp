@@ -1,73 +1,65 @@
+/**
+ * Description:
+ * this file implements methods defined in the ReadWriteFile.h file
+ *
+ * @author Richard Quayson
+ */
 
 #include "ReadWriteFile.h"
+#include "CreateObjects.h"
 #include <fstream>
 #include <string>
 #include <sstream>
 using namespace std;
 
 
-vector<string> split(const string&, char delimeter) {
-    vector<string> lineVector;
-    string column;
-    istringstream lineStream;
-
-    while (getline(lineStream, column, delimeter)) {
-        lineVector.push_back((column));
-    }
-
-    return lineVector;
-}
-
-
-//void strip(std::string& str) {
-//    if (str.length() == 0) {
-//        return;
-//    }
-//
-//    auto start_it = str.begin();
-//    auto end_it = str.rbegin();
-//    while (std::isspace(*start_it)) {
-//        ++start_it;
-//        if (start_it == str.end()) break;
-//    }
-//    while (std::isspace(*end_it)) {
-//        ++end_it;
-//        if (end_it == str.rend()) break;
-//    }
-//    int start_pos = start_it - str.begin();
-//    int end_pos = end_it.base() - str.begin();
-//    str = start_pos <= end_pos ? std::string(start_it, end_it.base()) : "";
-//}
-
-
-vector<vector<string>> ReadWriteFile::read(string filename) {
+vector<vector<string>> ReadWriteFile::read(const string& filename) {
     vector<vector<string>> stringVector;
-    vector<string> rows;
-    string line;
+//    vector<vector<string>> extremeCases;
+    vector<string> row;
+    string line, word, temp;
 
-    fstream file(filename, ios::in);
+    fstream file;
+    file.open(filename,ios::in);
+
     if (file.fail()) {
-        cout << "Could not open the file";
+        cout << "Could not open the file " << filename << endl;
     }
 
-    if (file.is_open()) {
-        while (getline(file, line)) {
-            rows.clear();
-            istringstream str(line);
-//            cout << line << endl;
-//
-//            for (char st : line) {
-//                cout << st;
-//            }
-            /*while (getline(str, word, ","))
-                row.push_back(word);*/
-            stringVector.push_back(rows);
+    // split on a newline character
+    while (getline(file,line)) {
+        row.clear();
+        stringstream s(line);
 
-            for (const string& row : rows) {
-                stringVector.push_back(split(row, ','));
-            }
+        // split on a comma
+        while(getline(s, word, ',')){
+            row.push_back(word);
+        }
+        /*
+            this if condition applies for the airports.csv file,
+            where we check for extra commas in the various columns
+            if there are extra commas, gracefully handle it
+         */
+        if (row.size() > 14) {
+//            extremeCases.push_back(row);
+            vector<string> newRow = CreateObjects::gracefullyHandleAirportObjectCreation(row);
+            stringVector.push_back(newRow);
+        } else {
+            stringVector.push_back(row);
         }
     }
     file.close();
     return stringVector;
+//    return extremeCases;
+}
+
+void ReadWriteFile::write(const string& filename, const string& data) {
+    ofstream outputFile(filename);
+
+    if (outputFile.fail()) {
+        cout << "Could not open " << filename << " for writing!" << endl;
+    }
+    outputFile << data;
+
+    outputFile.close();
 }

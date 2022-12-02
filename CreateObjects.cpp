@@ -1,3 +1,9 @@
+/**
+ * Description:
+ * this file implements method defined in the CreateObjects.h file
+ *
+ * @author Paa Kwasi Kodua
+ */
 
 #include "CreateObjects.h"
 #include <exception>
@@ -18,10 +24,9 @@ Airport CreateObjects::createAirportObject(vector<string> airportVector) {
         timeZone = stod(airportVector[9]);
 
     } catch (bad_cast& bc) {
-        cerr << "NumberFormatException caught: " << bc.what();
-        cerr << "Argument must be a number";
+        cout << bc.what() << endl;
     } catch (exception& e) {
-        cout << e.what();
+        cout << e.what() << endl;
     }
 
     string airportName = airportVector[1];
@@ -40,15 +45,14 @@ Airport CreateObjects::createAirportObject(vector<string> airportVector) {
 }
 
 
-
 void CreateObjects::printExtremeAirportCases() {
-    vector<vector<string>> results = ReadWriteFile::read("ICP_Individual_Project/src/airports.csv");
-    cout << "Number of Extreme cases: " << results.size();
+    vector<vector<string>> results = ReadWriteFile::read("airports.csv");
+    cout << "Number of Extreme cases: " << results.size() << endl;
     for (const vector<string>& resultVector: results) {
         for (const string& attribute: resultVector) {
-            cout << attribute << " ";
+            cout << attribute << ", ";
         }
-        cout << "\n";
+        cout << endl;
     }
 }
 
@@ -103,11 +107,11 @@ vector<string> CreateObjects::gracefullyHandleAirportObjectCreation(vector<strin
 
 Airline CreateObjects::createAirlineObject(vector<string> airlineVector) {
     int airlineId = 0;
+
     try {
         airlineId = stoi(airlineVector[0]);
     } catch (bad_cast& bc) {
-        cout << "NumberFormatException caught: " << bc.what() << endl;
-        cout << "Argument must be an int." << endl;
+        cout << bc.what() << endl;
     } catch (exception& e) {
         cout << e.what();
     }
@@ -138,10 +142,9 @@ Route CreateObjects::createRouteObject(vector<string> routeVector) {
         destinationAirportID = stoi(routeVector[5]);
         stops = stoi(routeVector[7]);
     } catch (bad_cast& bc) {
-        cout << "NumberFormatException caught: " << bc.what() << endl;
-        cout << "Argument must be an int." << endl;
+        cout << bc.what() << endl;
     } catch (range_error& re) {
-        cout << "Index out of bounds exception caught: " << re.what() << endl;
+        cout << re.what() << endl;
     } catch (exception& e) {
         cout << e.what();
     }
