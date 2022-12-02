@@ -1,68 +1,85 @@
-
+/**
+ * Description:
+ * this file implements the Uniform Cost Search method in the SearchAlgorithm.h file
+ *
+ * @author Richard Quayson
+ */
 
 #include "SearchAlgorithm.h"
 #include "MainHelper.h"
-#include <queue>
+#include <deque>
 #include <unordered_set>
+#include <algorithm>
+#include <iostream>
 
 
-bool containsValue(priority_queue<Node> frontier, Node &node) {
-    priority_queue<Node> cFrontier = frontier;
-    bool isPresent = false;
-    while (!cFrontier.empty()) {
-        Node n = cFrontier.top();
-        if (n == node) isPresent = true;
-        cFrontier.pop();
-    }
-    return isPresent;
-}
+void SearchAlgorithm::UniformCostSearch(AirRoutePlanning problem) {
 
-Solution SearchAlgorithm::UniformCostSearch(AirRoutePlanning problem) {
-    MainHelper helper;
-    Solution solution;
+    cout << "\nAbout to do Uniform Cost Search on problem!" << endl;
 
-    cout << "\nAbout to do Uniform Cost Search on problem: ";
-
-    priority_queue<Node> frontier;
+    // defining data structures to be use for the frontier and explored nodes
+    deque<Node> frontier;
     unordered_set<int> explored;
 
-    Node initNode = Node(problem.getInitialState());
-    frontier.push(initNode);
+    // create a node out of the start city and add it to the frontier
+    Node *root = new Node(problem.getInitialState());
+    frontier.push_back(*root);
 
     while (!frontier.empty()) {
-        Node node = frontier.top();
-        frontier.pop();
+        // pop the node on the front
+        Node *node = new Node(frontier.front());
+        frontier.pop_front();
 
-        if (problem.goalTest(node.getState())) {
-            cout << "Found a solution " << node.getState();
-            solution = node.solutionPath();
-            return solution;
-        } else {
-            explored.insert(node.getState());
-            cout << "Expanding node: " << node.getState();
+        // perform a goal test
+        if (problem.goalTest(node->getState())) {
+            cout << "Found a solution " << node->getState() << endl;
+            Solution solution = node->solutionPath();
+            MainHelper::validPaths.push_back(solution);
+            return;
+        }
+
+        // if the node is not the goal, add it's state to the explored set
+        else {
+            explored.insert(node->getState());
+            cout << "Expanding node: " << node->getState() << endl;
 
             try {
-                vector<Route> neighbours = problem.actions(node.getState());
+                // generate the possible destination airport from the given source airport
+                vector<Route> destinationAirports = problem.actions(node->getState());
 
-                for (Route route: neighbours) {
+                for (Route route: destinationAirports) {
                     try {
                         int newState = route.getDestinationAirportId();
-                        double pathCost = node.getPathCost() + helper.getDistance(node.getState(), newState);
+
+                        /**
+                         * compute the path cost of the child node computed as the sum of the
+                         * parent's path cost and the distance between the parent and the child
+                         */
+                        double pathCost = node->getPathCost() + MainHelper::getDistance(node->getState(), newState);
+
+                        // create the child node from the information
                         Node child = Node(newState, node, pathCost);
-                        if (explored.count(child.getState()) && containsValue(frontier, child)) {
-                            frontier.push(child);
-                        } else if (containsValue(frontier, child)) {
-                            // update the node
+
+                        // create an iterator object for the frontier (deque structure)
+                        auto iter = find(frontier.begin(), frontier.end(), child);
+
+                        /**
+                         * if the child's state has not been explored already and the node
+                         * is not on the frontier to be explored, add it to the frontier for later exploration
+                         */
+                        if (explored.find(newState) == explored.end() && iter == frontier.end()) {
+                            frontier.push_back(child);
                         }
                     } catch (exception& e) {
-                        cout << "Exception caught: " << e.what();
+//                        cout << e.what() << endl;
                     }
                 }
             } catch (exception& e) {
-                cout << "Exception caught: " << e.what();
+//                cout << e.what() << endl;
             }
         }
     }
-    cout << "No valid route exist!";
-    return solution;
+    // if no route is found after exploring the search tree, exit the program
+    cout << "No valid route exist!" << endl;
+    exit(0);
 }
