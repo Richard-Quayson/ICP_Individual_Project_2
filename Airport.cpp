@@ -1,4 +1,9 @@
-
+/**
+ * Description:
+ * this class implements methods defined in the Airport.h file
+ *
+ * @author Paa Kwasi Kodua
+ */
 
 #include "Airport.h"
 
@@ -45,19 +50,19 @@ string Airport::getIcaoCode() {
     return icaoCode;
 }
 
-double Airport::getLatitude() {
+double Airport::getLatitude() const {
     return latitude;
 }
 
-double Airport::getLongitude() {
+double Airport::getLongitude() const {
     return longitude;
 }
 
-double Airport::getAltitude() {
+double Airport::getAltitude() const {
     return altitude;
 }
 
-double Airport::getTimeZone() {
+double Airport::getTimeZone() const {
     return timeZone;
 }
 
@@ -79,7 +84,7 @@ string Airport::getSourceOfData() {
 
 string Airport::toString() {
     string airport = "Airport {";
-    airport += "airportId = " + getAirportId();
+    airport += "airportId = " + to_string(getAirportId());
     airport += ", airportName = " + getAirportName();
     airport += ", city = " + getCity();
     airport += ", country = " + getCountry();

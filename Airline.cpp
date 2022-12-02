@@ -1,3 +1,9 @@
+/**
+ * Description:
+ * this class implements the methods defined in the Airline.h file
+ *
+ * @author Paa Kwasi Kodua
+ */
 
 #include "Airline.h"
 
@@ -14,7 +20,7 @@ Airline::Airline(int airlineId, string airlineName, string alias, string iataCod
     this->activeStatus = activeStatus;
 }
 
-int Airline::getAirlineId() {
+int Airline::getAirlineId() const {
     return airlineId;
 }
 
@@ -48,7 +54,7 @@ string Airline::getActiveStatus() {
 
 string Airline::toString() {
     string airline = "Airline {";
-    airline += ", airlineId = " + getAirlineId();
+    airline += ", airlineId = " + to_string(getAirlineId());
     airline += ", alias = " + getAlias();
     airline += ", iataCode = " + getIataCode();
     airline += ", icaoCode = " + getIcaoCode();

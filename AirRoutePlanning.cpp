@@ -1,6 +1,6 @@
 /**
- * this file defines operations for the AirplaneRoutePlanning class
- * operations include goalTest and actions
+ * Description:
+ * this file implements methods defined in the AirRoutePlanning.h file
  *
  * @author Richard Quayson
  */
@@ -19,26 +19,21 @@ int AirRoutePlanning::getInitialState() {
     return initialState;
 }
 
-
 int AirRoutePlanning::getGoalState() {
     return goalState;
 }
-
 
 unordered_map<int, vector<Route>> AirRoutePlanning::getMap() {
     return routeData;
 }
 
-
 bool AirRoutePlanning::goalTest(int state) {
     return (goalState == state);
 }
 
-
 vector<Route> AirRoutePlanning::actions(int state) {
     return routeData.at(state);
 }
-
 
 string AirRoutePlanning::toString() {
     string airRoutePlanning = "AirplaneRoutePlanning {";

@@ -1,3 +1,10 @@
+/**
+ * this file defines operations for the Route class
+ * operations include constructor and accessor methods,
+ * an implementation of the isValidRoute method
+ *
+ * @author Paa Kwasi Kodua
+ */
 
 #ifndef ICP_INDIVIDUAL_PROJECT_C___ROUTE_H
 #define ICP_INDIVIDUAL_PROJECT_C___ROUTE_H
@@ -7,10 +14,6 @@
 using namespace std;
 
 class Route: public Routable {
-
-    /*
-        Instance variables
-     */
 private:
     string airlineCode;
     int airlineId;
@@ -50,7 +53,7 @@ public:
      * returns the airline's ID
      * @return
      */
-    int getAirlineId();
+    int getAirlineId() const;
 
     /**
      * returns the airport code of the source airport
@@ -62,7 +65,7 @@ public:
      * returns the airport ID of the source airport
      * @return this.sourceAirportID
      */
-    int getSourceAirportId();
+    int getSourceAirportId() const;
 
     /**
      * returns the airport code of the destination airport
@@ -74,10 +77,10 @@ public:
      * returns the airport ID of the destination airport
      * @return this.destinationAirportID
      */
-    int getDestinationAirportId();
+    int getDestinationAirportId() const;
 
     /**
-     * returns the codeshare of a route object
+     * returns the codeShare of a route object
      * @return codeShare
      */
     string getCodeShare();
@@ -86,24 +89,24 @@ public:
      * returns the number of stops the airline will make before reaching the destination airport
      * @return this.stops
      */
-    int getStops();
+    int getStops() const;
 
-    /*
-        returns the number of stops the airline will make before reaching the destination airport
-        @return this.stops
+    /**
+     * returns the number of stops the airline will make before reaching the destination airport
+     * @return this.stops
      */
     string getEquipment();
 
-    /*
-        implements the isValidRoute method of the Routable interface
-        and returns whether a given route is valid
-        @return boolean
+    /**
+     * implements the isValidRoute method of the Routable interface
+     * and returns whether a given route is valid
+     * @return boolean
      */
     bool isValidRoute() override;
 
-    /*
-        returns the attributes of a given route
-        @return string representation of all attributes of a route object
+    /**
+     * returns the attributes of a given route
+     * @return string representation of all attributes of a route object
      */
     string toString();
 };

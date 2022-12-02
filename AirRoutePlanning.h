@@ -1,4 +1,5 @@
 /**
+ * Description:
  * this file defines operations for the AirplaneRoutePlanning class
  * operations include goalTest and actions
  *
@@ -14,10 +15,8 @@
 #include <vector>
 #include <unordered_map>
 
-
 /**
  * this class provides a definition for the constructor, the goalTest and actions method
- *
  */
 
 class AirRoutePlanning{
@@ -71,7 +70,7 @@ public:
      * the airplane can go from a given state
      *
      * @param state current state (airport) the airplane is
-     * @return list<Route>
+     * @return vector<Route>
      */
     vector<Route> actions(int state);
 
@@ -81,6 +80,5 @@ public:
      */
     string toString();
 };
-
 
 #endif //ICP_INDIVIDUAL_PROJECT_C___AIRROUTEPROBLEM_H
