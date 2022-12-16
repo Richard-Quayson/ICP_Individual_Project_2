@@ -24,6 +24,9 @@ int main() {
 
     // read the user input file
     string inputFilename = "accra-winnipeg.txt";
+//    string inputFilename = "london-goroka.txt";
+//    string inputFilename = "lagos-cairo.txt";
+//    string inputFilename = "kwangju-cairo.txt";
     vector<vector<string>> problemData = ReadWriteFile::read(inputFilename);
 
     // get the source city and country
@@ -54,17 +57,21 @@ int main() {
 
     Solution optimalPath;
 
-    if (MainHelper::validPaths.size() == 1) {
-        optimalPath = MainHelper::validPaths[0];
+    if (!MainHelper::validPaths.empty()) {
+        optimalPath = MainHelper::validPaths.front();
     }
 
-    for (const Solution& validPath : MainHelper::validPaths) {
+    for (Solution validPath : MainHelper::validPaths) {
+        cout << validPath.toString() << endl;
         if (validPath.getPathCost() < optimalPath.getPathCost()) {
+            cout << "I was evaluated" << endl;
             optimalPath = validPath;
         }
     }
 
-    string outputFilename = R"(C:\Users\richard.quayson\OneDrive - Ashesi University\Desktop\ICP_Individual_Project_C++\accra-winnipeg-output.txt)";
+    cout << "Optimal Path: " << optimalPath.toString() << endl;
+    string outputFilename = R"(C:\Users\richard.quayson\OneDrive - Ashesi University\Desktop\ICP_Individual_Project_C++\)";
+    outputFilename += sourceCity + "-" + destinationCity + "-output.txt";
     string data = optimalPath.createSolutionString();
     ReadWriteFile::write(outputFilename, data);
 
