@@ -15,11 +15,11 @@ AirRoutePlanning::AirRoutePlanning(int initState, int goalState, unordered_map<i
     this->routeData = routeData;
 }
 
-int AirRoutePlanning::getInitialState() {
+int AirRoutePlanning::getInitialState() const {
     return initialState;
 }
 
-int AirRoutePlanning::getGoalState() {
+int AirRoutePlanning::getGoalState() const {
     return goalState;
 }
 
@@ -27,7 +27,7 @@ unordered_map<int, vector<Route>> AirRoutePlanning::getMap() {
     return routeData;
 }
 
-bool AirRoutePlanning::goalTest(int state) {
+bool AirRoutePlanning::goalTest(int state) const {
     return (goalState == state);
 }
 
@@ -35,7 +35,7 @@ vector<Route> AirRoutePlanning::actions(int state) {
     return routeData.at(state);
 }
 
-string AirRoutePlanning::toString() {
+string AirRoutePlanning::toString() const {
     string airRoutePlanning = "AirplaneRoutePlanning {";
     airRoutePlanning += "initialState=" + to_string(getInitialState());
     airRoutePlanning += ", goalState=" + to_string(getGoalState());

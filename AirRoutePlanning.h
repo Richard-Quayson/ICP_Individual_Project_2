@@ -44,13 +44,13 @@ public:
      * returns the initial state of the AirRoutePlanning problem
      * @return initialState
      */
-    int getInitialState();
+    int getInitialState() const;
 
     /**
      * returns the goal states of the AirRoutePlanning problem
      * @return goalState
      */
-    int getGoalState();
+    int getGoalState() const;
 
     /**
      * returns the routeData to be used for the search for the AirRoutePlanning problem
@@ -63,7 +63,7 @@ public:
      * @param state current state (airport) the airplane is
      * @return boolean
      */
-    bool goalTest(int state);
+    bool goalTest(int state) const;
 
     /**
      * returns the route objects of the possible destination airports
@@ -78,7 +78,7 @@ public:
      * returns a string representation of a given AirRoutePlanning problem
      * @return String
      */
-    string toString();
+    string toString() const;
 };
 
 #endif //ICP_INDIVIDUAL_PROJECT_C___AIRROUTEPROBLEM_H
