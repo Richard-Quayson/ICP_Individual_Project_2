@@ -1,0 +1,6 @@
+1. MS from LOS to CAI 0 stops.
+
+Total flights: 1
+Total additional stops: 0
+Total distance: 3935.779710 km
+Optimality criteria: distance covered by route

@@ -1,0 +1,8 @@
+1. KE from KWJ to CJU 0 stops.
+2. KE from CJU to PEK 0 stops.
+3. CA from PEK to CAI 0 stops.
+
+Total flights: 3
+Total additional stops: 0
+Total distance: 8868.378032 km
+Optimality criteria: distance covered by route

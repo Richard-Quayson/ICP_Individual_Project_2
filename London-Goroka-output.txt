@@ -1,0 +1,8 @@
+1. BA from LHR to HKG 0 stops.
+2. PX from HKG to POM 0 stops.
+3. CG from POM to GKA 0 stops.
+
+Total flights: 3
+Total additional stops: 0
+Total distance: 15135.862400 km
+Optimality criteria: distance covered by route
