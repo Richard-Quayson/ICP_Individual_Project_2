@@ -24,6 +24,16 @@ double Solution::getPathCost() const {
     return pathCost;
 }
 
+string Solution::toString() {
+    string solution = "Solution { Action Sequence: ";
+    for (int state: stateSequence) {
+        solution += to_string(state) + ", ";
+    }
+    solution += "Path cost: " + to_string(pathCost) + " }";
+
+    return solution;
+}
+
 /**
  * Logic:
  * loops through the state sequence of a given Solution object

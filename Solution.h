@@ -49,10 +49,16 @@ public:
     double getPathCost() const;
 
     /**
+     * returns a string representation of a Solution object
+     * @return string
+     */
+    string toString();
+
+    /**
      * Description:
      * this methods create the summary to be written to the output file
      * using the state sequence, the airportData and the routeData
-     * @return String
+     * @return string
      */
     string createSolutionString();
 };
