@@ -7,7 +7,8 @@
 #include "Route.h"
 
 Route::Route(string airlineCode, int airlineId, string sourceAirportCode, int sourceAirportId,
-             string destinationAirportCode, int destinationAirportId, string codeShare, int stops, string equipment) {
+             string destinationAirportCode, int destinationAirportId, string codeShare, int stops,
+             string equipment) {
     this->airlineCode = airlineCode;
     this->airlineId = airlineId;
     this->sourceAirportCode = sourceAirportCode;
