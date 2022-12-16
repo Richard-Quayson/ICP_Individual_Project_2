@@ -20,11 +20,6 @@ and provide a new output filename.
 // change inputFilename to the new filename
 string inputFilename = "london-madrid.txt";
 vector<vector<string>> problemData = ReadWriteFile::read(inputFilename);
-
-// provide a new output filename
-string outputFilename = R"(C:\Users\richard.quayson\OneDrive - Ashesi University\Desktop\ICP_Individual_Project_C++\london-madrid-output.txt)";
-string data = optimalPath.createSolutionString();
-ReadWriteFile::write(outputFilename, data);
 ```
 
 Afterwards, build and run the program. After "Processing complete!" is printed to the console,
